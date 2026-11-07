@@ -120,6 +120,15 @@ def rollout_output_without_decode(batch: Req) -> OutputBatch:
     )
 
 
+# Returned by the worker before any forward when a skip request reaches a
+# pipeline whose last stage is not a DecodingStage that supports the skip;
+# rollout_api maps it to 400.
+SKIP_DECODE_UNSUPPORTED_ERROR = (
+    "rollout_return_generated_output=False is not supported: the pipeline's "
+    "last stage cannot skip the decode"
+)
+
+
 def skip_decode_if_requested(forward):
     """Return the trajectory alone, without running the VAE, when the request asks for no generated output."""
 
