@@ -1169,6 +1169,8 @@ class Scheduler(
         output_items = self._count_first_dim(output_batch.output)
         output_path_items = self._count_first_dim(output_batch.output_file_paths)
 
+        # TODO(rockdu): a skipped decode (generated_output_skipped) has nothing to
+        # count; split it by per_req_counts and slice rollout_trajectory_data.
         if output_items is None and output_path_items is None:
             logger.warning(
                 "Batched output has neither tensor outputs nor output_file_paths; cannot split safely."

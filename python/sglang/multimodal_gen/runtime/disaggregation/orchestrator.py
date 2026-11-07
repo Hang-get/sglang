@@ -896,6 +896,8 @@ class DiffusionServer:
             audio_sample_rate=scalar_fields.get("audio_sample_rate"),
             error=scalar_fields.get("error"),
         )
+        # TODO(rockdu): generated_output_skipped is not sent over the wire yet;
+        # the denoiser rejects skip requests at admission until it is.
         if (
             output_batch.output is None
             and output_batch.audio is None
